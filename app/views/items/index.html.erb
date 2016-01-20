@@ -1,6 +1,9 @@
-
-  <h1>Hello</h1>
-  <% @items.each do |item| %>
-    <strong><%= link_to item.title, item %>:</strong> <%= link_to "Edit", edit_item_path(item) %><br>
-    <small><%= item.description %></small><br><br>
+  <% if user_signed_in?%>
+    <h2>Items for <%= current_user.name %></h2>
+    <% @items.each do |item| %>
+      <strong><%= link_to item.title, item %>:</strong> <%= link_to "Edit", edit_item_path(item) %><br>
+      <small><%= item.description %></small><br><br>
+    <% end %>
+  <% else %>
+    <%= render 'layouts/static_landing_page'%>
   <% end %>
