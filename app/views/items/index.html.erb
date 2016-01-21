@@ -1,6 +1,7 @@
+<div class="box">
   <% if user_signed_in?%>                     <!-- Open if else statement-->
     <h2>Items for <%= current_user.name %></h2>
-    <% @items.each do |item| %>
+    <% @items.each do |item| %><!-- Open DO Itemlist -->  
 
       <% if item.completed? %> <!-- Open if else statement 2 -->
         <div class="row item">
@@ -9,7 +10,7 @@
             <p style="opacity: 0.5;"><small><%= item.description %></small></p>
             <p style="opacity: 0.5;"><small>Completed <%= time_ago_in_words(item.completed_at)%> ago</small></p>
           </div>
-          <%= countdown Time.now + 28.hours %>
+         
           <div class="col-md-1 icon">
             <p><%= link_to item, method: :delete, data:{confirm: "are you sure?"} do%></p>
               <li class="fa fa-lg fa-trash"></li>
@@ -20,9 +21,11 @@
       <% else %>
         <div class="row item">
           <div class="col-md-2 icon">
+         
             <h3><%= link_to item.title, item %>:</h3>
             <p><small><%= item.description %></small></p>
             <p><small>Created at <%= time_ago_in_words(item.created_at)%> ago</small></p>
+            <p><small>Time left to complete task: <%= (((item.created_at + 7.days) - item.created_at) / 86400).floor %> days</small></p>
           </div>
           <div class="col-md-1 icon">
             <p><%= link_to complete_item_path(item), method: :patch do %></p>
@@ -30,11 +33,16 @@
             <% end %>
           </div>
         </div>
+      <% end %> <!-- closed if else statement 2 -->
+
+      <% if item.expired? %><!-- Destroy expired Item -->
+        <% item.destroy %>
       <% end %>
 
-    <% end %> <!-- Close if else statement 2-->  
+    <% end %> <!-- closed DO Itemlist -->  
+    
+  
   <% else %>                 
     <%= render 'layouts/static_landing_page'%>
   <% end %><!-- Close if else statement -->
-
-<!--1:08-->
+</div>

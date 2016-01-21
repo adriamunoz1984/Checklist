@@ -15,3 +15,22 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body
+{
+  background-color: #595959;
+}
+
+.box
+{
+  width: 1000px;
+  background-color: #e6e6e6;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 10px 10px 25px black;
+}
+
+.new-item
+{
+  padding-left: 250px;
+}
