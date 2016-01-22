@@ -10,7 +10,9 @@ group :production do
    gem 'rails_12factor'
  end
  
-
+ group :development do
+   gem 'sqlite3'
+ end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
